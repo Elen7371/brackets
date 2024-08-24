@@ -1,13 +1,17 @@
 module.exports = function check(str, bracketsConfig) {
+  // function check(str, bracketsConfig) {
   // part 1 - check str is true //
 
   function checkBr(string) {
     let br = [")", "]", "}", "|", "(", "[", "{"];
     let someBr = [];
-    if (string[0] == ")" || string[0] == "]" || string[0] == "}") {
+    if (
+      string[0] == ")" ||
+      string[0] == "]" ||
+      string[0] == "}") {
       return false;
     } else if (!br.some((el) => string.includes(el))) {
-      someBr = [];
+      return false;
     } else {
       for (let i = 0; i < string.length; i++) {
         if (string[i] === "(" || string[i] === "[" || string[i] === "{") {
@@ -33,21 +37,35 @@ module.exports = function check(str, bracketsConfig) {
   }
   // part 2 - check bracketsConfig is true //
 
-  return checkBr(str) !== true
-    ? false
-    : checkBr(bracketsConfig.join("")) === true
-    ? true
-    : false;
-}
+  // return checkBr(str) !== true
+  //   ? false
+  //   : checkBr(bracketsConfig.join("")) === true
+  //   ? true
+  //     : false;
+  if (str.length % 2 !== 0) {
+    return false;
+  } else if (checkBr(str) === true && checkBr(bracketsConfig.join("")) === true) {
+    return true;
+  } else if (
+    checkBr(str) === false &&
+    checkBr(bracketsConfig.join("")) === false
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 // console.log(
 //   check(
-//     "55555125(75557777777555566667888888667661133833448441111222233333444442)266666",
-//     ["1", "2"],
-//     ["3", "4"],
-//     ["5", "6"],
-//     ["7", "7"],
-//     ["8", "8"]
+//     "([[[[(({{{}}}(([](((((((())))||||||))))[[{{|{{}}|}}[[[[]]]]{{{{{}}}}}]]))))]]]]))()",
+//     [
+//       ["1", "2"],
+//       ["3", "4"],
+//       ["5", "6"],
+//       ["7", "7"],
+//       ["8", "7"],
+//     ]
 //   )
 // );
 
