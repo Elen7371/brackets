@@ -1,11 +1,13 @@
-// module.exports =
-function check(str, bracketsConfig) {
+module.exports = function check(str, bracketsConfig) {
   // part 1 - check str is true //
 
   function checkBr(string) {
+    let br = [")", "]", "}", "|", "(", "[", "{"];
     let someBr = [];
     if (string[0] == ")" || string[0] == "]" || string[0] == "}") {
       return false;
+    } else if (!br.some((el) => string.includes(el))) {
+      someBr = [];
     } else {
       for (let i = 0; i < string.length; i++) {
         if (string[i] === "(" || string[i] === "[" || string[i] === "{") {
@@ -37,6 +39,17 @@ function check(str, bracketsConfig) {
     ? true
     : false;
 }
+
+// console.log(
+//   check(
+//     "55555125(75557777777555566667888888667661133833448441111222233333444442)266666",
+//     ["1", "2"],
+//     ["3", "4"],
+//     ["5", "6"],
+//     ["7", "7"],
+//     ["8", "8"]
+//   )
+// );
 
 // console.log(check("()", [["(", ")"]])); // -> true
 // console.log(check("((()))()", [["(", ")"]])); // -> true
